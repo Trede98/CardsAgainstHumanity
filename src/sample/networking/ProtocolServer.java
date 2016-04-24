@@ -45,8 +45,8 @@ public class ProtocolServer {
                 break;
             case "DISCONNECTED":
                 send("REMOVEPLAYER#" + elements[1], PointerToSend.ALL, null);
-                game.removePlayer(elements[1]);
                 removeElementFromThreadGroup(elements[1]);
+                game.removePlayer(elements[1]);
         }
     }
 
