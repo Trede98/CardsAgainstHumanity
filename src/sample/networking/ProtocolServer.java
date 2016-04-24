@@ -147,8 +147,9 @@ public class ProtocolServer {
             while (!interrupted){
                 send("CARDCZAR", PointerToSend.USER, game.nextCardCzar());
                 send("NEWROUND", PointerToSend.ALL, null);
+                int size = threadsGroup.size();
 
-                for (int i = 0; i < 60 && carte.size() < (threadsGroup.size() - 1) && !interrupted; i++) {
+                for (int i = 0; i < 60 && carte.size() < (size - 1) && !interrupted; i++) {
                     try {
                         TimeUnit.SECONDS.sleep(1);
                     } catch (InterruptedException e) {

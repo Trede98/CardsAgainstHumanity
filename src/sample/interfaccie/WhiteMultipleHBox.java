@@ -20,11 +20,18 @@ public class WhiteMultipleHBox extends HBox {
 
         this.setWidth(width*cards.length);
         this.setHeight(heigh);
+        this.setSpacing(10);
 
 
         for (int i = 0; i < cards.length; i++){
             Label l = new Label(cards[i]);
             l.setPrefSize(width - 20, heigh - 20);
+            l.setStyle("-fx-padding: 10;\n"
+                    +"-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);\n"
+                    + "-fx-background-radius: 10 10 10 10;\n"
+                    + "-fx-border-color: #000000;\n"
+                    + "-fx-border-radius: 10 10 10 10;\n"
+                    + "-fx-background-color: #FFFFFF;");
             l.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
             l.setFont(f);
             l.setTextFill(Color.BLACK);

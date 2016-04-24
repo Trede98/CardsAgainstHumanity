@@ -19,7 +19,7 @@
     <children>
         <AnchorPane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="855.0" prefWidth="1289.0" style="-fx-background-color: #404040;" stylesheets="@../css/jfoenix-components.css">
             <children>
-            <StackPane fx:id="blackCard" layoutX="528.0" layoutY="107.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="295.0" prefWidth="234.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-radius: 10 10 10 10; -fx-border-radius: 10 10 10 10; -fx-border-color: #FFFFFF; -fx-background-color: #000000;" visible="false">
+            <StackPane fx:id="blackCard" layoutX="519.0" layoutY="112.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="295.0" prefWidth="234.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-radius: 10 10 10 10; -fx-border-radius: 10 10 10 10; -fx-border-color: #FFFFFF; -fx-background-color: #000000;" visible="false">
                <children>
                   <Label fx:id="labelPane" alignment="TOP_LEFT" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="213.0" textFill="WHITE" wrapText="true">
                      <font>
@@ -54,8 +54,8 @@
                </font>
             </Label>
             <JFXButton />
-            <JFXButton fx:id="btnConfirm" disable="true" layoutX="824.0" layoutY="116.0" onAction="#confirmCard" prefHeight="40.0" prefWidth="127.0" styleClass="button-raised" text="CONFIRM SELECTION" visible="false" />
-            <Label fx:id="labelCzar" alignment="CENTER" layoutX="319.0" layoutY="21.0" prefHeight="80.0" prefWidth="652.0" text="YOU ARE THE CARD CZAR" textFill="WHITE" visible="false">
+            <JFXButton fx:id="btnConfirm" disable="true" layoutX="800.0" layoutY="112.0" onAction="#confirmCard" prefHeight="40.0" prefWidth="127.0" styleClass="button-raised" text="CONFIRM SELECTION" visible="false" />
+            <Label fx:id="labelCzar" alignment="CENTER" layoutX="313.0" layoutY="20.0" prefHeight="80.0" prefWidth="652.0" text="YOU ARE THE CARD CZAR" textFill="WHITE" visible="false">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
