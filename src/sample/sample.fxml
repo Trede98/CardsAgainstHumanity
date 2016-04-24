@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.*?>
+
+<GridPane alignment="center" hgap="10" prefHeight="855.0" prefWidth="1265.0" stylesheets="@css/jfoenix-components.css" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <columnConstraints>
+      <ColumnConstraints maxWidth="1271.0" minWidth="1259.0" prefWidth="1259.0" />
+      <ColumnConstraints maxWidth="12.0" minWidth="5.0" prefWidth="12.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <AnchorPane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="855.0" prefWidth="1276.0" style="-fx-background-color: #404040;" stylesheets="@css/jfoenix-components.css">
+         <children>
+            <JFXButton fx:id="hostBtn" layoutX="539.0" layoutY="482.0" onAction="#startServer" prefHeight="62.0" prefWidth="206.0" styleClass="button-raised" stylesheets="@css/jfoenix-components.css" text="HOST" />
+            <JFXButton fx:id="connectBtn" layoutX="539.0" layoutY="403.0" onAction="#startClient" prefHeight="62.0" prefWidth="206.0" styleClass="button-raised" stylesheets="@css/jfoenix-components.css" text="CONNECT" />
+            <JFXTextField fx:id="tfUser" layoutX="537.0" layoutY="234.0" minWidth="187.0" prefHeight="39.0" prefWidth="200.0" promptText="USERNAME" style="-fx-background-color: none; -fx-text-fill: WHITE;" />
+            <JFXTextField fx:id="tfIP" layoutX="539.0" layoutY="284.0" minWidth="187.0" prefHeight="39.0" prefWidth="200.0" promptText="ADDRESS" style="-fx-background-color: none; -fx-text-fill: WHITE;" />
+            <JFXTextField fx:id="tfPort" layoutX="539.0" layoutY="337.0" minWidth="187.0" prefHeight="39.0" prefWidth="200.0" promptText="PORT" style="-fx-background-color: none; -fx-text-fill: WHITE;" />
+            <Label alignment="CENTER" layoutX="124.0" layoutY="62.0" prefHeight="109.0" prefWidth="1029.0" text="CARDS AGAINST HUMANITY" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="72.0" />
+               </font>
+            </Label>
+            <JFXSnackbar fx:id="snack" layoutX="556.0" layoutY="670.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</GridPane>

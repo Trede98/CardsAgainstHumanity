@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.*?>
+
+<GridPane alignment="center" hgap="10" prefHeight="855.0" prefWidth="1283.0" stylesheets="@../css/jfoenix-components.css" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.interfaccie.ControllerClient">
+    <columnConstraints>
+        <ColumnConstraints maxWidth="1284.0" minWidth="1271.0" prefWidth="1276.0" />
+        <ColumnConstraints maxWidth="12.0" minWidth="5.0" prefWidth="7.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+    </rowConstraints>
+    <children>
+        <AnchorPane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="855.0" prefWidth="1289.0" style="-fx-background-color: #404040;" stylesheets="@../css/jfoenix-components.css">
+            <children>
+            <Pane fx:id="blackCard" layoutX="528.0" layoutY="121.0" prefHeight="295.0" prefWidth="234.0" stylesheets="@../css/jfoenix-components.css">
+               <children>
+                  <Label fx:id="labelPane" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="213.0" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="HelveticaNeueLTPro-Roman" size="24.0" />
+                     </font>
+                  </Label>
+               </children></Pane>
+                <JFXSnackbar fx:id="snack" layoutX="201.0" layoutY="670.0" prefHeight="20.0" prefWidth="164.0" stylesheets="@../css/jfoenix-components.css" />
+            <JFXListView fx:id="selectedCards" cellVerticalMargin="0.0" layoutX="274.0" layoutY="560.0" orientation="HORIZONTAL" prefHeight="295.0" prefWidth="1015.0" style="-fx-background-color: #404040;" styleClass="selezionate" />
+            <JFXListView fx:id="punti" layoutY="55.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="274.0" style="-fx-background-color: #cccccc;" />
+            <JFXListView fx:id="yourCards" layoutX="1032.0" prefHeight="855.0" prefWidth="255.0" style="-fx-background-color: #404040;" stylesheets="@../css/scrollStyle.css">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <styleClass>
+                  <String fx:value="mylistview" />
+                  <String fx:value="selezionate" />
+               </styleClass></JFXListView>
+            <JFXSpinner fx:id="spinner" layoutX="1159.0" layoutY="37.0" radius="20.0" stylesheets="@../css/jfoenix-components.css">
+               <children>
+                  <JFXSpinner radius="13.0" stylesheets="@../css/jfoenix-components.css" />
+               </children></JFXSpinner>
+            <Label fx:id="label" ellipsisString="" layoutX="1097.0" layoutY="107.0" prefHeight="29.0" prefWidth="172.0" text="Waiting for the game to start" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutY="-1.0" prefHeight="55.0" prefWidth="274.0" text="POINTS" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <JFXButton />
+            <JFXButton fx:id="btnConfirm" disable="true" layoutX="824.0" layoutY="116.0" onAction="#confirmCard" prefHeight="40.0" prefWidth="127.0" styleClass="button-raised" text="CONFIRM SELECTION" visible="false" />
+            <Label fx:id="labelCzar" alignment="CENTER" layoutX="319.0" layoutY="21.0" prefHeight="80.0" prefWidth="652.0" text="YOU ARE THE CARD CZAR" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            </children>
+        </AnchorPane>
+    </children>
+</GridPane>
