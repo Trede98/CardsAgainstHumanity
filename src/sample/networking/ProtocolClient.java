@@ -13,15 +13,12 @@ import java.io.IOException;
 
 public class ProtocolClient {
 
-
-    private DataInputStream inputStream;
     private DataOutputStream outputStream;
     private String user;
     private ControllerInterfaccie controller;
 
 
-    public ProtocolClient(DataOutputStream dataOutputStream, DataInputStream dataInputStream, String user) {
-        this.inputStream = dataInputStream;
+    public ProtocolClient(DataOutputStream dataOutputStream, String user) {
         this.outputStream = dataOutputStream;
         this.user = user;
     }
@@ -40,21 +37,27 @@ public class ProtocolClient {
                 controller.deleteAll();
                 break;
             case "CHANGEBLACKCARD":
+                if (controller.isGameStarted())
                 controller.changeBlackText(elements[1]);
                 break;
             case "POINTPLUS":
+                if (controller.isGameStarted())
                 controller.pointPlus(elements[1], elements[2]);
                 break;
             case "ADDWHITECARD":
+                if (controller.isGameStarted())
                 controller.addWhiteCard(elements[1]);
                 break;
             case "SELECTING":
+                if (controller.isGameStarted())
                 controller.startSelection(elements[1]);
                 break;
             case "CARDCZAR":
+                if (controller.isGameStarted())
                 controller.setCardCzar(true);
                 break;
             case "NEWROUND":
+                if (controller.isGameStarted())
                 controller.setNewRound();
                 break;
             case "ADDPLAYER":
@@ -63,12 +66,11 @@ public class ProtocolClient {
             case "REMOVEPLAYER":
                 controller.removePlayer(elements[1]);
             case "END":
-                if(elements[1].equals("VICTORY")){
+                if(controller.isGameStarted() && elements[1].equals("VICTORY")){
                     controller.endGame(elements[2]);
-                } else {
+                } else if(controller.isGameStarted()) {
                     controller.resetGame();
                 }
-
                 break;
             default:
                 System.out.println("Unvalid frame");

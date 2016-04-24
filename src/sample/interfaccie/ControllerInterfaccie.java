@@ -28,4 +28,6 @@ public interface ControllerInterfaccie {
     void endGame(String user);
 
     void deleteAll();
+
+    boolean isGameStarted();
 }

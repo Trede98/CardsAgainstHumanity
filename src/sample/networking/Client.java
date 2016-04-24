@@ -19,7 +19,7 @@ public class Client {
         try {
             this.reader = new DataInputStream(socket.getInputStream());
             this.writer = new DataOutputStream(socket.getOutputStream());
-            this.protocolClient = new ProtocolClient(writer, reader, user);
+            this.protocolClient = new ProtocolClient(writer, user);
             this.protocolClient.send("USERNAME#"+ this.user);
         } catch (IOException e) {
             e.printStackTrace();

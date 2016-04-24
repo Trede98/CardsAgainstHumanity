@@ -52,6 +52,7 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
     private String cards = "";
     private int numCards;
     private boolean cardCzar;
+    private boolean gameStarted = false;
 
     public void setProtocolClient(ProtocolClient protocolClient) {
         this.protocolClient = protocolClient;
@@ -92,8 +93,9 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
                         numCards--;
                         if(numCards == 0){
                             protocolClient.send("CARDSELECTED#"+ cards + "#" + protocolClient.getUser());
+                            cards = "";
                         }
-                        cards = "";
+
                     }
                 }
             });
@@ -110,6 +112,7 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
                 blackCard.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
                 btnConfirm.setVisible(true);
                 btnConfirm.setDisable(false);
+                gameStarted = true;
             }
         });
     }
@@ -256,6 +259,7 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
 
     @Override
     public void resetGame() {
+        gameStarted = false;
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -274,6 +278,7 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
 
     @Override
     public void endGame(String user) {
+        gameStarted = false;
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -295,5 +300,9 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
             }
         });
 
+    }
+
+    public boolean isGameStarted() {
+        return gameStarted;
     }
 }

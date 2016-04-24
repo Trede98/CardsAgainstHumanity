@@ -56,6 +56,7 @@ public class ControllerClient implements ControllerInterfaccie, Initializable {
     private String cards = "";
     private int numCards;
     private boolean cardCzar = false;
+    private boolean gameStarted = false;
 
 
     @FXML
@@ -89,8 +90,8 @@ public class ControllerClient implements ControllerInterfaccie, Initializable {
                     numCards--;
                     if(numCards == 0){
                         protocolClient.send("CARDSELECTED#"+ cards + "#" + protocolClient.getUser());
+                        cards = "";
                     }
-                    cards = "";
                 }
             }
         });
@@ -104,6 +105,7 @@ public class ControllerClient implements ControllerInterfaccie, Initializable {
 
     @Override
     public void firstRound(){
+        gameStarted = true;
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -261,6 +263,7 @@ public class ControllerClient implements ControllerInterfaccie, Initializable {
 
     @Override
     public void resetGame() {
+        gameStarted = false;
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -280,6 +283,7 @@ public class ControllerClient implements ControllerInterfaccie, Initializable {
 
     @Override
     public void endGame(String user) {
+        gameStarted = false;
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -303,4 +307,7 @@ public class ControllerClient implements ControllerInterfaccie, Initializable {
 
     }
 
+    public boolean isGameStarted() {
+        return gameStarted;
+    }
 }
