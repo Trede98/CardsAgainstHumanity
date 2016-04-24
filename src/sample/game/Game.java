@@ -110,11 +110,11 @@ public class Game {
     }
 
     public boolean checkVictory(){
-        if(points.containsValue(1)){
+        if(points.containsValue(10)){
             Iterator it = points.keySet().iterator();
             while (it.hasNext()){
                 String user = (String) it.next();
-                if(points.get(user) == 1){
+                if(points.get(user) == 10){
                     end("VICTORY#" + user);
                 }
             }

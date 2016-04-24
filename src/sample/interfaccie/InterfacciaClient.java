@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import sample.networking.Client;
 
+import java.net.ConnectException;
 import java.net.Socket;
 
 /**
@@ -21,13 +22,17 @@ public class InterfacciaClient {
     private String user;
     private FXMLLoader fxmlLoader;
 
-    public InterfacciaClient(String ip, int port, String user) {
+    public InterfacciaClient(String ip, int port, String user) throws ConnectException {
         try {
             this.user = user;
             start(new Stage());
-            client = new Client(new Socket(ip, port), user);
-            controllerClient = fxmlLoader.<ControllerClient>getController();
-            initInterface();
+            try{
+                client = new Client(new Socket(ip, port), user);
+                controllerClient = fxmlLoader.<ControllerClient>getController();
+                initInterface();
+            } catch (ConnectException e){
+                throw new ConnectException("There's no server for this IP");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

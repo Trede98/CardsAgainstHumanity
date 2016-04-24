@@ -13,6 +13,7 @@ import sample.networking.Client;
 import sample.networking.Server;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -67,9 +68,14 @@ public class Controller implements Initializable{
         if(!checkCorrectInformation(tfPort.getText(), TypeInfo.PORT) || !checkCorrectInformation(tfUser.getText(), TypeInfo.USERNAME) || !checkCorrectInformation(tfIP.getText(), TypeInfo.IP)){
             snack.fireEvent(new JFXSnackbar.SnackbarEvent(("You must insert a valid PORT, USERNAME and ADDRESS")));
         } else {
-            InterfacciaClient interfacciaClient = new InterfacciaClient(tfIP.getText(), Integer.parseInt(tfPort.getText()), tfUser.getText());
-            Stage stage = (Stage) connectBtn.getScene().getWindow();
-            stage.close();
+            try {
+                InterfacciaClient interfacciaClient = new InterfacciaClient(tfIP.getText(), Integer.parseInt(tfPort.getText()), tfUser.getText());
+                Stage stage = (Stage) connectBtn.getScene().getWindow();
+                stage.close();
+            } catch (ConnectException e){
+                snack.fireEvent(new JFXSnackbar.SnackbarEvent(e.getMessage()));
+            }
+
         }
 
     }

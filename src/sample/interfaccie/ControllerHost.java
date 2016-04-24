@@ -267,6 +267,7 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
                 btnConfirm.setVisible(false);
                 btnConfirm.setDisable(true);
                 labelPane.setText("");
+                labelCzar.setVisible(false);
             }
         });
     }
