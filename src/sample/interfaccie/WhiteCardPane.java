@@ -13,23 +13,27 @@ import javax.swing.*;
 /**
  * Created by Giovanni on 24/04/2016.
  */
-public class WhiteCardPane extends Pane {
+public class WhiteCardPane extends StackPane {
 
-    private Pane defaultPane;
+    private StackPane defaultPane;
     private Label defaultLabel;
     private Label label;
     private String phrase;
 
-    public WhiteCardPane(Pane defaultPane, Label defaultLabel, String phrase) {
+    public WhiteCardPane(StackPane defaultPane, Label defaultLabel, String phrase) {
         this.phrase = phrase;
         this.defaultLabel = defaultLabel;
         this.defaultPane = defaultPane;
         this.label = new Label(phrase);
 
-        this.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
         this.setWidth(defaultPane.getWidth() - 20);
         this.setHeight(defaultPane.getHeight() - 20);
         this.setPrefSize(defaultPane.getWidth() - 20, defaultPane.getHeight() - 20);
+        this.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);\n"
+                        + "-fx-background-radius: 10 10 10 10;\n"
+                        + "-fx-border-color: #000000;\n"
+                        + "-fx-border-radius: 10 10 10 10;\n"
+                        + "-fx-background-color: #FFFFFF;");
 
         this.label.setLayoutX(defaultLabel.getLayoutX());
         this.label.setLayoutY(defaultLabel.getLayoutY());

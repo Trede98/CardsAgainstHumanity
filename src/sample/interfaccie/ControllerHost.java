@@ -5,10 +5,10 @@ import com.jfoenix.controls.JFXListView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import sample.networking.ProtocolClient;
 
 import java.net.URL;
@@ -34,7 +34,7 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
     AnchorPane pane;
 
     @FXML
-    Pane blackCard;
+    StackPane blackCard;
 
     @FXML
     Label labelPane;
@@ -109,7 +109,7 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
             public void run() {
                 btnStart.setVisible(false);
                 btnStart.setDisable(true);
-                blackCard.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+                blackCard.setVisible(true);
                 btnConfirm.setVisible(true);
                 btnConfirm.setDisable(false);
                 gameStarted = true;
@@ -267,7 +267,7 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
                 selectedCards.getItems().clear();
                 btnStart.setVisible(true);
                 btnStart.setDisable(false);
-                blackCard.setBackground(new Background(new BackgroundFill(Color.rgb(64,64,64), CornerRadii.EMPTY, Insets.EMPTY)));
+                blackCard.setVisible(false);
                 btnConfirm.setVisible(false);
                 btnConfirm.setDisable(true);
                 labelPane.setText("");

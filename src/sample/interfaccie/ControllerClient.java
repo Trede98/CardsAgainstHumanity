@@ -32,7 +32,7 @@ public class ControllerClient implements ControllerInterfaccie, Initializable {
     AnchorPane pane;
 
     @FXML
-    Pane blackCard;
+    StackPane blackCard;
 
     @FXML
     Label labelPane;
@@ -113,7 +113,7 @@ public class ControllerClient implements ControllerInterfaccie, Initializable {
                 spinner.setDisable(true);
                 label.setVisible(false);
                 label.setDisable(true);
-                blackCard.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+                blackCard.setVisible(true);
                 btnConfirm.setVisible(true);
                 btnConfirm.setDisable(false);
             }
@@ -193,8 +193,6 @@ public class ControllerClient implements ControllerInterfaccie, Initializable {
                 numCards++;
             }
         }
-
-        System.out.println(numCards);
     }
 
 
@@ -273,7 +271,7 @@ public class ControllerClient implements ControllerInterfaccie, Initializable {
                 spinner.setDisable(false);
                 label.setVisible(true);
                 label.setDisable(false);
-                blackCard.setBackground(new Background(new BackgroundFill(Color.rgb(64,64,64), CornerRadii.EMPTY, Insets.EMPTY)));
+                blackCard.setVisible(false);
                 btnConfirm.setVisible(false);
                 btnConfirm.setDisable(true);
                 labelPane.setText("");
