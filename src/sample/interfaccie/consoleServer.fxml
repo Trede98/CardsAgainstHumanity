@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="447.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.interfaccie.ControllerConsole">
+   <children>
+      <TextArea layoutX="14.0" layoutY="14.0" prefHeight="419.0" prefWidth="419.0" />
+      <TextField layoutX="14.0" layoutY="447.0" maxWidth="376.0" prefHeight="40.0" prefWidth="317.0" />
+      <Button layoutX="343.0" layoutY="447.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="89.0" text="Button" />
+   </children>
+</AnchorPane>
