@@ -15,6 +15,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 public class ControllerHost implements ControllerInterfaccie, Initializable {
 
@@ -231,7 +232,7 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
             blackCard.setVisible(false);
             btnConfirm.setVisible(false);
             btnConfirm.setDisable(true);
-            labelPane.setText("");
+            labelPane.setText("Waiting for a new round");
             labelCzar.setVisible(false);
         });
     }
@@ -257,4 +258,5 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
     public boolean isGameStarted() {
         return gameStarted;
     }
+
 }

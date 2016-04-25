@@ -10,9 +10,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-/**
- * Created by Giovanni on 24/04/2016.
- */
 public class WhiteMultipleHBox extends HBox {
 
     public WhiteMultipleHBox(Font f, String all, double width, double heigh) {
@@ -23,11 +20,11 @@ public class WhiteMultipleHBox extends HBox {
         this.setSpacing(5);
 
 
-        for (int i = 0; i < cards.length; i++){
-            Label l = new Label(cards[i]);
+        for (String card : cards) {
+            Label l = new Label(card);
             l.setPrefSize(width - 20, heigh - 20);
             l.setStyle("-fx-padding: 10;\n"
-                    +"-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);\n"
+                    + "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);\n"
                     + "-fx-background-radius: 10 10 10 10;\n"
                     + "-fx-border-color: #000000;\n"
                     + "-fx-border-radius: 10 10 10 10;\n"

@@ -127,9 +127,9 @@ public class Game {
     }
 
     private boolean checkVictory(){
-        if(points.containsValue(10)){
+        if(points.containsValue(1)){
             for (Object user : points.keySet()) {
-                if (points.get(user) == 10) {
+                if (points.get(user) == 1) {
                     end("VICTORY#" + user);
                 }
             }
