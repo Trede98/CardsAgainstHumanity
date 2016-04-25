@@ -31,7 +31,7 @@
                 <JFXSnackbar fx:id="snack" layoutX="201.0" layoutY="670.0" prefHeight="20.0" prefWidth="164.0" stylesheets="@../css/jfoenix-components.css" />
             <JFXListView fx:id="selectedCards" cellVerticalMargin="0.0" layoutX="274.0" layoutY="560.0" orientation="HORIZONTAL" prefHeight="295.0" prefWidth="1015.0" style="-fx-background-color: #404040;" styleClass="selezionate" />
             <JFXListView fx:id="punti" layoutY="55.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="274.0" style="-fx-background-color: #cccccc;" />
-            <JFXListView fx:id="yourCards" layoutX="1032.0" prefHeight="855.0" prefWidth="255.0" style="-fx-background-color: #404040;" stylesheets="@../css/scrollStyle.css">
+            <JFXListView fx:id="yourCards" layoutX="1032.0" prefHeight="855.0" prefWidth="255.0" style="-fx-background-color: #404040;" stylesheets="@../css/scrollStyle.css" visible="false">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>

@@ -139,13 +139,19 @@ public class ProtocolServer {
     public class Clock extends Thread {
 
         private boolean salta;
+        private boolean choosing;
 
         Clock() {
             salta = false;
+            choosing = true;
         }
 
         public void setSalta(boolean salta) {
             this.salta = salta;
+        }
+
+        public boolean isChoosing() {
+            return choosing;
         }
 
         @Override
@@ -154,7 +160,7 @@ public class ProtocolServer {
             while (!interrupted){
                 send("CARDCZAR", PointerToSend.USER, game.nextCardCzar());
                 send("NEWROUND", PointerToSend.ALL, null);
-
+                choosing = true;
                 for (int i = 0; i < 60 && carte.size() < (threadsGroup.size() - 1) && !interrupted && !salta; i++) {
                     try {
                         TimeUnit.SECONDS.sleep(1);
@@ -162,7 +168,7 @@ public class ProtocolServer {
                         interrupted = true;
                     }
                 }
-
+                choosing = false;
                 String all = "";
                 Iterator it = carte.keySet().iterator();
                 if(carte.size() > 0) {

@@ -54,7 +54,7 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
     private boolean cardCzar;
     private boolean gameStarted = false;
 
-    public void setProtocolClient(ProtocolClient protocolClient) {
+    void setProtocolClient(ProtocolClient protocolClient) {
         this.protocolClient = protocolClient;
     }
 
@@ -66,37 +66,31 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
     @FXML
     public void confirmCard(){
         if(cardCzar){
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    WhiteMultipleHBox selected = (WhiteMultipleHBox) selectedCards.getSelectionModel().getSelectedItem();
-                    Iterator it = selected.getChildren().iterator();
-                    String cards = "";
-                    while (it.hasNext()){
-                        Label l = (Label) it.next();
-                        cards = cards + l.getText() + "@@";
-                    }
-                    protocolClient.send("CARDWINNING#"+cards);
-                    cardCzar = false;
-                    numCards = 0;
+            Platform.runLater(() -> {
+                WhiteMultipleHBox selected = (WhiteMultipleHBox) selectedCards.getSelectionModel().getSelectedItem();
+                Iterator it = selected.getChildren().iterator();
+                String cards1 = "";
+                while (it.hasNext()){
+                    Label l = (Label) it.next();
+                    cards1 = cards1 + l.getText() + "@@";
                 }
+                protocolClient.send("CARDWINNING#"+ cards1);
+                cardCzar = false;
+                numCards = 0;
             });
         }else {
 
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    if(numCards > 0){
-                        WhiteCardPane selected = (WhiteCardPane) yourCards.getSelectionModel().getSelectedItem();
-                        cards = cards + selected.getPhrase() + "@@";
-                        yourCards.getItems().remove(selected);
-                        numCards--;
-                        if(numCards == 0){
-                            protocolClient.send("CARDSELECTED#"+ cards + "#" + protocolClient.getUser());
-                            cards = "";
-                        }
-
+            Platform.runLater(() -> {
+                if(numCards > 0){
+                    WhiteCardPane selected = (WhiteCardPane) yourCards.getSelectionModel().getSelectedItem();
+                    cards = cards + selected.getPhrase() + "@@";
+                    yourCards.getItems().remove(selected);
+                    numCards--;
+                    if(numCards == 0){
+                        protocolClient.send("CARDSELECTED#"+ cards + "#" + protocolClient.getUser());
+                        cards = "";
                     }
+
                 }
             });
         }
@@ -104,61 +98,45 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
 
     @Override
     public void firstRound(){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                btnStart.setVisible(false);
-                btnStart.setDisable(true);
-                blackCard.setVisible(true);
-                btnConfirm.setVisible(true);
-                btnConfirm.setDisable(false);
-                gameStarted = true;
-            }
+        Platform.runLater(() -> {
+            btnStart.setVisible(false);
+            btnStart.setDisable(true);
+            blackCard.setVisible(true);
+            labelPane.setText("Waiting for a new round");
+            gameStarted = true;
         });
     }
 
     @Override
     public void addPlayer(String user) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                pointsHashMap.put(user, 0);
-                labelHashMap.put(user, new Label(user + ": 0 awesome points"));
-                punti.getItems().add(labelHashMap.get(user));
-            }
+        Platform.runLater(() -> {
+            pointsHashMap.put(user, 0);
+            labelHashMap.put(user, new Label(user + ": 0 awesome points"));
+            punti.getItems().add(labelHashMap.get(user));
         });
     }
 
 
     @Override
     public void removePlayer(String user){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                punti.getItems().remove(labelHashMap.get(user));
-            }
-        });
+        Platform.runLater(() -> punti.getItems().remove(labelHashMap.get(user)));
     }
 
     @Override
     public void pointPlus(String user, String card) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                int punti = pointsHashMap.get(user) + 1;
-                Label l = labelHashMap.get(user);
-                l.setText(user + ": " + punti + " awesome points");
-                pointsHashMap.put(user, punti);
-                labelCzar.setText(user + " WON THE ROUND");
-                labelCzar.setVisible(true);
+        Platform.runLater(() -> {
+            int punti1 = pointsHashMap.get(user) + 1;
+            Label l = labelHashMap.get(user);
+            l.setText(user + ": " + punti1 + " awesome points");
+            pointsHashMap.put(user, punti1);
+            labelCzar.setText(user + " WON THE ROUND");
+            labelCzar.setVisible(true);
 
-                Iterator it = selectedCards.getItems().iterator();
-                while (it.hasNext()){
-                    WhiteMultipleHBox wmb = (WhiteMultipleHBox) it.next();
-                    if(!card.equals(wmb.getAllPhrase())){
-                        //selectedCards.getItems().remove(wmb);
-                        it.remove();
-                    }
+            Iterator it = selectedCards.getItems().iterator();
+            while (it.hasNext()){
+                WhiteMultipleHBox wmb = (WhiteMultipleHBox) it.next();
+                if(!card.equals(wmb.getAllPhrase())){
+                    it.remove();
                 }
             }
         });
@@ -168,23 +146,15 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
 
     @Override
     public void addWhiteCard(String phrase) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                if(yourCards.getItems().size() < 10)
-                yourCards.getItems().add(new WhiteCardPane(blackCard, labelPane, phrase));
-            }
+        Platform.runLater(() -> {
+            if(yourCards.getItems().size() < 10)
+            yourCards.getItems().add(new WhiteCardPane(blackCard, labelPane, phrase));
         });
     }
 
     @Override
     public void changeBlackText(String text){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                labelPane.setText(text);
-            }
-        });
+        Platform.runLater(() -> labelPane.setText(text));
         String s = text;
         numCards = 0;
         if(!s.contains("_____")){
@@ -210,53 +180,42 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
 
     @Override
     public void setNewRound() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                if(cardCzar){
-                    labelCzar.setText("YOU ARE THE CARD CZAR");
-                    btnConfirm.setDisable(true);
-                    btnConfirm.setVisible(false);
-                    yourCards.setDisable(true);
-                    yourCards.setVisible(false);
-                    labelCzar.setVisible(true);
-                } else {
-                    yourCards.setDisable(false);
-                    yourCards.setVisible(true);
-                    btnConfirm.setDisable(false);
-                    btnConfirm.setVisible(true);
-                    labelCzar.setVisible(false);
-                }
-                selectedCards.getItems().clear();
+        Platform.runLater(() -> {
+            if(cardCzar){
+                labelCzar.setText("YOU ARE THE CARD CZAR");
+                btnConfirm.setDisable(true);
+                btnConfirm.setVisible(false);
+                yourCards.setDisable(true);
+                yourCards.setVisible(false);
+                labelCzar.setVisible(true);
+            } else {
+                yourCards.setDisable(false);
+                yourCards.setVisible(true);
+                btnConfirm.setDisable(false);
+                btnConfirm.setVisible(true);
+                labelCzar.setVisible(false);
             }
+            selectedCards.getItems().clear();
         });
     }
 
     @Override
     public void startSelection(String cards){
         String[] all = cards.split("!!");
-        for (int i = 0; i < all.length; i++){
-            WhiteMultipleHBox whb = new WhiteMultipleHBox(labelPane.getFont(),all[i], blackCard.getWidth(), blackCard.getHeight());
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    selectedCards.getItems().add(whb);
-                }
-            });
+        for (String anAll : all) {
+            WhiteMultipleHBox whb = new WhiteMultipleHBox(labelPane.getFont(), anAll, blackCard.getWidth(), blackCard.getHeight());
+            Platform.runLater(() -> selectedCards.getItems().add(whb));
         }
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                if(!cardCzar){
-                    yourCards.setDisable(true);
-                    yourCards.setVisible(false);
-                    btnConfirm.setDisable(true);
-                    btnConfirm.setVisible(false);
-                } else {
-                    btnConfirm.setDisable(false);
-                    btnConfirm.setVisible(true);
-                }
+        Platform.runLater(() -> {
+            if(!cardCzar){
+                yourCards.setDisable(true);
+                yourCards.setVisible(false);
+                btnConfirm.setDisable(true);
+                btnConfirm.setVisible(false);
+            } else {
+                btnConfirm.setDisable(false);
+                btnConfirm.setVisible(true);
             }
         });
     }
@@ -264,45 +223,34 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
     @Override
     public void resetGame() {
         gameStarted = false;
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                yourCards.getItems().clear();
-                selectedCards.getItems().clear();
-                btnStart.setVisible(true);
-                btnStart.setDisable(false);
-                blackCard.setVisible(false);
-                btnConfirm.setVisible(false);
-                btnConfirm.setDisable(true);
-                labelPane.setText("");
-                labelCzar.setVisible(false);
-            }
+        Platform.runLater(() -> {
+            yourCards.getItems().clear();
+            selectedCards.getItems().clear();
+            btnStart.setVisible(true);
+            btnStart.setDisable(false);
+            blackCard.setVisible(false);
+            btnConfirm.setVisible(false);
+            btnConfirm.setDisable(true);
+            labelPane.setText("");
+            labelCzar.setVisible(false);
         });
     }
 
     @Override
     public void endGame(String user) {
         gameStarted = false;
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                btnConfirm.setVisible(false);
-                btnConfirm.setDisable(true);
-                labelCzar.setText(user + " WON THE GAME");
-                labelCzar.setVisible(true);
-            }
+        Platform.runLater(() -> {
+            btnConfirm.setVisible(false);
+            btnConfirm.setDisable(true);
+            labelCzar.setText(user + " WON THE GAME");
+            labelCzar.setVisible(true);
         });
 
     }
 
     @Override
     public void deleteAll(){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                punti.getItems().clear();
-            }
-        });
+        Platform.runLater(() -> punti.getItems().clear());
 
     }
 

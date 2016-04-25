@@ -20,6 +20,7 @@ public class Game {
     private int cardCzarIndex;
     private String cardCzar;
     private String blackCard;
+    private boolean started;
 
     public Game(ProtocolServer protocolServer, int min) {
         this.protocolServer = protocolServer;
@@ -35,6 +36,7 @@ public class Game {
     }
 
     private void end(String type){
+        started = false;
         cardCzarIndex = 0;
         cardCzar = "";
         (protocolServer.getClock()).interrupt();
@@ -46,6 +48,7 @@ public class Game {
 
     public void start(){
         if(protocolServer.getThreadsGroup().size() >= min){
+        started = true;
         mazzoNero = new Mazzo(TypeCard.BLACK);
         mazzoBianco = new Mazzo(TypeCard.WHITE);
         protocolServer.send("STARTGAME", PointerToSend.ALL, null);
@@ -107,6 +110,20 @@ public class Game {
     public void addPlayer(String username){
         points.put(username, 0);
         giocatori.add(username);
+
+        if(started && protocolServer.getClock().isChoosing()){
+            protocolServer.send("STARTGAME", PointerToSend.USER, username);
+            for (int i = 0; i < 10; i++){
+                sendWhiteCard(username);
+            }
+            protocolServer.send("CHANGEBLACKCARD#"+ blackCard, PointerToSend.USER, username);
+            protocolServer.send("NEWROUND", PointerToSend.USER, username);
+        } else if(started){
+            protocolServer.send("STARTGAME", PointerToSend.USER, username);
+            for (int i = 0; i < 10; i++){
+                sendWhiteCard(username);
+            }
+        }
     }
 
     private boolean checkVictory(){

@@ -106,8 +106,7 @@ public class ControllerClient implements ControllerInterfaccie, Initializable {
             label.setVisible(false);
             label.setDisable(true);
             blackCard.setVisible(true);
-            btnConfirm.setVisible(true);
-            btnConfirm.setDisable(false);
+            labelPane.setText("Waiting for a new round");
         });
     }
 
