@@ -23,18 +23,20 @@ public class InterfacciaClient {
     private FXMLLoader fxmlLoader;
 
     public InterfacciaClient(String ip, int port, String user) throws ConnectException {
+        Stage s = new Stage();
         try {
             this.user = user;
-            start(new Stage());
+            start(s);
             try{
                 client = new Client(new Socket(ip, port), user);
                 controllerClient = fxmlLoader.<ControllerClient>getController();
                 initInterface();
             } catch (ConnectException e){
+                s.close();
                 throw new ConnectException("There's no server for this IP");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
     }
 
