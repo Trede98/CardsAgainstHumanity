@@ -55,7 +55,7 @@ public class Controller implements Initializable{
         if(!checkCorrectInformation(tfPort.getText(), TypeInfo.PORT) || !checkCorrectInformation(tfUser.getText(), TypeInfo.USERNAME)){
             snack.fireEvent(new JFXSnackbar.SnackbarEvent(("You must insert a valid PORT and USERNAME")));
         } else {
-            Thread server = new Thread(new Server(Integer.parseInt(tfPort.getText()), tfUser.getText(), 10));
+            Server server = new Server(Integer.parseInt(tfPort.getText()), tfUser.getText(), 10);
             server.start();
             Stage stage = (Stage) hostBtn.getScene().getWindow();
             stage.close();

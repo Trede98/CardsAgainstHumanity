@@ -1,6 +1,7 @@
 package sample.networking;
 
 import sample.game.Game;
+import sample.interfaccie.InterfacciaConsole;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,9 +9,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by Giovanni on 22/04/2016.
- */
 public class ProtocolServer {
 
     private ArrayList<Server.LinkedSocked> threadsGroup;
@@ -18,16 +16,17 @@ public class ProtocolServer {
     private Game game;
     private boolean selected = false;
     private Clock clock;
+    private InterfacciaConsole console;
 
     public ProtocolServer(ArrayList<Server.LinkedSocked> threadsGroup) {
         this.threadsGroup = threadsGroup;
         this.carte = new HashMap<>();
+        clock = new Clock();
 }
 
     public void execute(String frame) {
-        System.out.println("Server ----------" + frame);
+        console.getControllerConsole().send(frame);
         String[] elements = frame.split("#");
-
         switch (elements[0]) {
             case "STARTGAME":
                 game.start();
@@ -114,6 +113,10 @@ public class ProtocolServer {
                 rimosso = true;
             }
         }
+    }
+
+    public void setConsole(InterfacciaConsole console) {
+        this.console = console;
     }
 
     void setThreadsGroup(ArrayList<Server.LinkedSocked> threadsGroup) {

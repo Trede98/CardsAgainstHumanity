@@ -1,6 +1,7 @@
 package sample.networking;
 
 import sample.game.Game;
+import sample.interfaccie.InterfacciaConsole;
 import sample.interfaccie.InterfacciaHost;
 
 import java.io.DataInputStream;
@@ -13,7 +14,7 @@ import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class Server  implements Runnable{
+public class Server  extends Thread{
 
     private ServerSocket serverSocket;
     private int maxNum;
@@ -26,6 +27,7 @@ public class Server  implements Runnable{
 
     public Server(int port, String user, int maxNum) {
         try {
+            InterfacciaConsole interfacciaConsole = new InterfacciaConsole(this);
             serverSocket = new ServerSocket(port);
             this.maxNum = maxNum;
             cont = 0;
@@ -35,6 +37,8 @@ public class Server  implements Runnable{
             game = new Game(protocolServer, min);
             protocolServer.setGame(game);
             InterfacciaHost interfacciaHost = new InterfacciaHost(port, user);
+            interfacciaConsole.setServer(this);
+            protocolServer.setConsole(interfacciaConsole);
         } catch (IOException e) {
 
         }
@@ -43,44 +47,52 @@ public class Server  implements Runnable{
 
     @Override
     public void run() {
-        for (;;){
-            if(cont < maxNum){
-                try {
-                    Socket socket = serverSocket.accept();
-                    LinkedSocked t = new LinkedSocked(socket);
-                    t.start();
-                    threadGroup.add(t);
-                    protocolServer.setThreadsGroup(threadGroup);
-                    cont++;
-                } catch (IOException e) {
-
+        boolean interrupted = false;
+        try {
+            while (!interrupted){
+                if(cont < maxNum){
+                    try {
+                        Socket socket = serverSocket.accept();
+                        LinkedSocked t = new LinkedSocked(socket);
+                        t.start();
+                        threadGroup.add(t);
+                        protocolServer.setThreadsGroup(threadGroup);
+                        cont++;
+                    } catch (IOException e) {
+                    }
                 }
+                    TimeUnit.SECONDS.sleep(1);
             }
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
+        } catch (InterruptedException e){
+            interrupted = true;
+            for (LinkedSocked s : threadGroup){
+                game.removePlayer(s.getUser());
+                s.interrupt();
+            }
+            threadGroup.clear();
+            if(protocolServer.getClock().isAlive()) {
+                protocolServer.getClock().interrupt();
             }
         }
+
     }
 
-
-    public void startGame(){
-        if(cont > min) game.start();
-    }
 
     public ProtocolServer getProtocolServer() {
         return protocolServer;
     }
 
+    public ServerSocket getServerSocket() {
+        return serverSocket;
+    }
+
     public class LinkedSocked extends Thread {
 
-        private Socket socket;
         private DataInputStream reader;
         private DataOutputStream writer;
         private String user;
 
         public LinkedSocked(Socket socket) {
-            this.socket = socket;
             this.user = null;
             try {
                 this.reader = new DataInputStream(socket.getInputStream());
@@ -132,6 +144,8 @@ public class Server  implements Runnable{
         public String getUser() {
             return user;
         }
+
+
     }
 }
 

@@ -28,6 +28,7 @@ public class Game {
         points = new HashMap<>();
         giocatori = new ArrayList<>();
         cardCzarIndex = 0;
+        cardCzar = "";
 
     }
 
@@ -100,9 +101,9 @@ public class Game {
         giocatori.remove(username);
         giocatori.trimToSize();
 
-        if(protocolServer.getThreadsGroup().size() < min){
+        if(protocolServer.getThreadsGroup().size() < min && started){
             end("NEEDPLAYER");
-        } else if(username.equals(cardCzar)){
+        } else if(username.equals(cardCzar) && started){
             protocolServer.getClock().setSalta(true);
         }
     }
@@ -127,9 +128,9 @@ public class Game {
     }
 
     private boolean checkVictory(){
-        if(points.containsValue(1)){
+        if(points.containsValue(10)){
             for (Object user : points.keySet()) {
-                if (points.get(user) == 1) {
+                if (points.get(user) == 10) {
                     end("VICTORY#" + user);
                 }
             }

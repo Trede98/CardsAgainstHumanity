@@ -19,10 +19,7 @@ public class ProtocolClient {
     }
 
 
-
-
     protected void execute(String frame){
-        System.out.println(user + "----------" + frame);
         String[] elements = frame.split("#");
         switch (elements[0]){
             case "STARTGAME":
@@ -68,9 +65,6 @@ public class ProtocolClient {
                     controller.resetGame();
                 }
                 break;
-            default:
-                System.out.println("Unvalid frame");
-                break;
         }
     }
 
@@ -78,7 +72,7 @@ public class ProtocolClient {
         try {
             outputStream.writeUTF(toSend);
         } catch (SocketException e){
-
+            controller.resetGame();
         } catch (IOException e) {
 
         }
