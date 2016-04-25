@@ -105,6 +105,7 @@ public class Controller implements Initializable{
                 break;
             case USERNAME:
                 String[] pr = field.split(" ");
+                if(pr[0].equals("")) return false;
                 return pr.length != 0;
         }
         return true;
