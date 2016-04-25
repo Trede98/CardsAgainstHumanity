@@ -3,18 +3,14 @@ package sample;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
-import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import sample.interfaccie.InterfacciaClient;
-import sample.networking.Client;
 import sample.networking.Server;
 
-import java.io.IOException;
 import java.net.ConnectException;
-import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -45,8 +41,6 @@ public class Controller implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         snack.registerSnackbarContainer(pane);
-        tfPort.setText("1000");
-        tfIP.setText("127.0.0.1");
     }
 
 

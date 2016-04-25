@@ -55,5 +55,6 @@ public class ControllerConsole implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         textArea.setEditable(false);
+        textArea.setWrapText(true);
     }
 }
