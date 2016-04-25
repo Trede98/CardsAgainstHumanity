@@ -4,17 +4,11 @@ import sample.cards.Mazzo;
 import sample.cards.TypeCard;
 import sample.networking.PointerToSend;
 import sample.networking.ProtocolServer;
-import sample.networking.Server;
 import sample.networking.Server.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 
-/**
- * Created by Giovanni on 21/04/2016.
- */
 public class Game {
 
     private HashMap<String,Integer> points;
@@ -23,7 +17,8 @@ public class Game {
     private Mazzo mazzoBianco;
     private Mazzo mazzoNero;
     private int min;
-    private int cardCzar;
+    private int cardCzarIndex;
+    private String cardCzar;
     private String blackCard;
 
     public Game(ProtocolServer protocolServer, int min) {
@@ -31,7 +26,7 @@ public class Game {
         this.min = min;
         points = new HashMap<>();
         giocatori = new ArrayList<>();
-        cardCzar = 0;
+        cardCzarIndex = 0;
 
     }
 
@@ -39,7 +34,9 @@ public class Game {
 
     }
 
-    public void end(String type){
+    private void end(String type){
+        cardCzarIndex = 0;
+        cardCzar = "";
         (protocolServer.getClock()).interrupt();
         protocolServer.send("END#" + type, PointerToSend.ALL, null);
         if(type.equals("NEEDPLAYER")){
@@ -57,12 +54,10 @@ public class Game {
         }
     }
 
-    public void sender(int number){
-        Iterator it = protocolServer.getThreadsGroup().iterator();
-        while (it.hasNext()){
-            LinkedSocked s = (LinkedSocked) it.next();
+    private void sender(int number){
+        for (LinkedSocked s : protocolServer.getThreadsGroup()) {
             points.put(s.getUser(), 0);
-            for (int i = 0; i < number; i++){
+            for (int i = 0; i < number; i++) {
                 sendWhiteCard(s.getUser());
             }
         }
@@ -82,7 +77,7 @@ public class Game {
     }
 
 
-    public  void sendWhiteCard (String username){
+    private void sendWhiteCard(String username){
         protocolServer.send("ADDWHITECARD#"+ mazzoBianco.getCard().getContent(), PointerToSend.USER ,username);
     }
 
@@ -101,7 +96,12 @@ public class Game {
         points.remove(username);
         giocatori.remove(username);
         giocatori.trimToSize();
-        if(protocolServer.getThreadsGroup().size() < min) end("NEEDPLAYER");
+
+        if(protocolServer.getThreadsGroup().size() < min){
+            end("NEEDPLAYER");
+        } else if(username.equals(cardCzar)){
+            protocolServer.getClock().setSalta(true);
+        }
     }
 
     public void addPlayer(String username){
@@ -109,12 +109,10 @@ public class Game {
         giocatori.add(username);
     }
 
-    public boolean checkVictory(){
+    private boolean checkVictory(){
         if(points.containsValue(10)){
-            Iterator it = points.keySet().iterator();
-            while (it.hasNext()){
-                String user = (String) it.next();
-                if(points.get(user) == 10){
+            for (Object user : points.keySet()) {
+                if (points.get(user) == 10) {
                     end("VICTORY#" + user);
                 }
             }
@@ -123,12 +121,12 @@ public class Game {
     }
 
     public String nextCardCzar(){
-        if(cardCzar == giocatori.size()){
-            cardCzar = 0;
+        if(cardCzarIndex >= giocatori.size()){
+            cardCzarIndex = 0;
         }
-        String s = giocatori.get(cardCzar);
-        cardCzar++;
-        return s;
+        cardCzar = giocatori.get(cardCzarIndex);
+        cardCzarIndex++;
+        return cardCzar;
     }
 }
 

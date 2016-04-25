@@ -20,7 +20,7 @@ public class WhiteMultipleHBox extends HBox {
 
         this.setWidth(width*cards.length);
         this.setHeight(heigh);
-        this.setSpacing(10);
+        this.setSpacing(5);
 
 
         for (int i = 0; i < cards.length; i++){

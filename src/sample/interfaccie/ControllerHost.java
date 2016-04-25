@@ -149,6 +149,8 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
                 Label l = labelHashMap.get(user);
                 l.setText(user + ": " + punti + " awesome points");
                 pointsHashMap.put(user, punti);
+                labelCzar.setText(user + " WON THE ROUND");
+                labelCzar.setVisible(true);
 
                 Iterator it = selectedCards.getItems().iterator();
                 while (it.hasNext()){
@@ -184,6 +186,7 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
             }
         });
         String s = text;
+        numCards = 0;
         if(!s.contains("_____")){
             numCards = 1;
         } else {
@@ -211,6 +214,7 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
             @Override
             public void run() {
                 if(cardCzar){
+                    labelCzar.setText("YOU ARE THE CARD CZAR");
                     btnConfirm.setDisable(true);
                     btnConfirm.setVisible(false);
                     yourCards.setDisable(true);

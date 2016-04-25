@@ -1,14 +1,9 @@
 package sample.networking;
 
-import sample.Controller;
-import sample.interfaccie.ControllerClient;
-import sample.interfaccie.ControllerHost;
 import sample.interfaccie.ControllerInterfaccie;
-import sample.interfaccie.InterfacciaHost;
-
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.SocketException;
 
 
 public class ProtocolClient {
@@ -18,7 +13,7 @@ public class ProtocolClient {
     private ControllerInterfaccie controller;
 
 
-    public ProtocolClient(DataOutputStream dataOutputStream, String user) {
+    protected ProtocolClient(DataOutputStream dataOutputStream, String user) {
         this.outputStream = dataOutputStream;
         this.user = user;
     }
@@ -26,7 +21,7 @@ public class ProtocolClient {
 
 
 
-    public void execute(String frame){
+    protected void execute(String frame){
         System.out.println(user + "----------" + frame);
         String[] elements = frame.split("#");
         switch (elements[0]){
@@ -65,6 +60,7 @@ public class ProtocolClient {
                 break;
             case "REMOVEPLAYER":
                 controller.removePlayer(elements[1]);
+                break;
             case "END":
                 if(controller.isGameStarted() && elements[1].equals("VICTORY")){
                     controller.endGame(elements[2]);
@@ -81,6 +77,8 @@ public class ProtocolClient {
     public void send(String toSend){
         try {
             outputStream.writeUTF(toSend);
+        } catch (SocketException e){
+
         } catch (IOException e) {
 
         }

@@ -1,8 +1,5 @@
 package sample.interfaccie;
 
-/**
- * Created by Giovanni on 24/04/2016.
- */
 public interface ControllerInterfaccie {
 
     void changeBlackText(String text);

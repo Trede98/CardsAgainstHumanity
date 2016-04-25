@@ -22,7 +22,6 @@ public class ProtocolServer {
     public ProtocolServer(ArrayList<Server.LinkedSocked> threadsGroup) {
         this.threadsGroup = threadsGroup;
         this.carte = new HashMap<>();
-        this.clock = new Clock();
 }
 
     public void execute(String frame) {
@@ -32,6 +31,7 @@ public class ProtocolServer {
         switch (elements[0]) {
             case "STARTGAME":
                 game.start();
+                this.clock = new Clock();
                 clock.start();
                 break;
             case "CARDWINNING":
@@ -116,11 +116,11 @@ public class ProtocolServer {
         }
     }
 
-    public void setThreadsGroup(ArrayList<Server.LinkedSocked> threadsGroup) {
+    void setThreadsGroup(ArrayList<Server.LinkedSocked> threadsGroup) {
         this.threadsGroup = threadsGroup;
     }
 
-    public Game getGame() {
+    Game getGame() {
         return game;
     }
 
@@ -132,13 +132,20 @@ public class ProtocolServer {
         return threadsGroup;
     }
 
-    public void setGame(Game game) {
+    void setGame(Game game) {
         this.game = game;
     }
 
     public class Clock extends Thread {
 
-        public Clock() {
+        private boolean salta;
+
+        Clock() {
+            salta = false;
+        }
+
+        public void setSalta(boolean salta) {
+            this.salta = salta;
         }
 
         @Override
@@ -147,9 +154,8 @@ public class ProtocolServer {
             while (!interrupted){
                 send("CARDCZAR", PointerToSend.USER, game.nextCardCzar());
                 send("NEWROUND", PointerToSend.ALL, null);
-                int size = threadsGroup.size();
 
-                for (int i = 0; i < 60 && carte.size() < (size - 1) && !interrupted; i++) {
+                for (int i = 0; i < 60 && carte.size() < (threadsGroup.size() - 1) && !interrupted && !salta; i++) {
                     try {
                         TimeUnit.SECONDS.sleep(1);
                     } catch (InterruptedException e) {
@@ -166,7 +172,7 @@ public class ProtocolServer {
 
                     send("SELECTING#" + all.substring(0, all.length() - 2), PointerToSend.ALL, null);
 
-                for (int i = 0; i < 60 && !selected && !interrupted; i++) {
+                for (int i = 0; i < 60 && !selected && !interrupted && !salta; i++) {
                     try {
                         TimeUnit.SECONDS.sleep(1);
                     } catch (InterruptedException e) {
@@ -174,7 +180,7 @@ public class ProtocolServer {
                     }
                 }
 
-                for (int i = 0; i < 8 && !interrupted; i++) {
+                for (int i = 0; i < 8 && !interrupted && selected && !salta; i++) {
                     try {
                         TimeUnit.SECONDS.sleep(1);
                     } catch (InterruptedException e) {
@@ -185,7 +191,10 @@ public class ProtocolServer {
                 game.refillWhiteCard();
                 game.sendBlackCard();
                 selected = false;
+                salta = false;
             }
+
+
         }
     }
 }
