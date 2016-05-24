@@ -1,10 +1,10 @@
-package sample.game;
+package cardsagainsthumanity.game;
 
-import sample.cards.Mazzo;
-import sample.cards.TypeCard;
-import sample.networking.PointerToSend;
-import sample.networking.ProtocolServer;
-import sample.networking.Server.*;
+import cardsagainsthumanity.cards.Mazzo;
+import cardsagainsthumanity.cards.TypeCard;
+import cardsagainsthumanity.networking.PointerToSend;
+import cardsagainsthumanity.networking.ProtocolServer;
+import cardsagainsthumanity.networking.Server.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,6 +1,6 @@
-package sample.networking;
+package cardsagainsthumanity.networking;
 
-import sample.interfaccie.ControllerInterfaccie;
+import cardsagainsthumanity.interfaccie.ControllerInterfaccie;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.SocketException;

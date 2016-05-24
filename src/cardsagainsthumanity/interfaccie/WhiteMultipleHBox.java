@@ -1,4 +1,4 @@
-package sample.interfaccie;
+package cardsagainsthumanity.interfaccie;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

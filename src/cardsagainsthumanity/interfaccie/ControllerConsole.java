@@ -1,4 +1,4 @@
-package sample.interfaccie;
+package cardsagainsthumanity.interfaccie;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -6,7 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import sample.networking.Server;
+import cardsagainsthumanity.networking.Server;
 
 import java.io.IOException;
 import java.net.URL;

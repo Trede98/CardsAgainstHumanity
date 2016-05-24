@@ -1,4 +1,4 @@
-package sample.networking;
+package cardsagainsthumanity.networking;
 
 /**
  * Created by Giovanni on 22/04/2016.

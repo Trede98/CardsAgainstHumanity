@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import com.jfoenix.controls.*?>
 
-<GridPane alignment="center" hgap="10" prefHeight="855.0" prefWidth="1265.0" stylesheets="@css/jfoenix-components.css" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<GridPane alignment="center" hgap="10" prefHeight="855.0" prefWidth="1265.0" stylesheets="@css/jfoenix-components.css" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cardsagainsthumanity.Controller">
    <columnConstraints>
       <ColumnConstraints maxWidth="1271.0" minWidth="1259.0" prefWidth="1259.0" />
       <ColumnConstraints maxWidth="12.0" minWidth="5.0" prefWidth="12.0" />

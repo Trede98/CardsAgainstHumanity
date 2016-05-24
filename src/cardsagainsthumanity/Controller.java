@@ -1,4 +1,4 @@
-package sample;
+package cardsagainsthumanity;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSnackbar;
@@ -7,9 +7,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import sample.interfaccie.InterfacciaClient;
-import sample.networking.Server;
+import cardsagainsthumanity.interfaccie.InterfacciaClient;
+import cardsagainsthumanity.networking.Server;
 
+import java.io.IOException;
 import java.net.ConnectException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -49,10 +50,15 @@ public class Controller implements Initializable{
         if(!checkCorrectInformation(tfPort.getText(), TypeInfo.PORT) || !checkCorrectInformation(tfUser.getText(), TypeInfo.USERNAME)){
             snack.fireEvent(new JFXSnackbar.SnackbarEvent(("You must insert a valid PORT and USERNAME")));
         } else {
-            Server server = new Server(Integer.parseInt(tfPort.getText()), tfUser.getText(), 10);
-            server.start();
-            Stage stage = (Stage) hostBtn.getScene().getWindow();
-            stage.close();
+            try{
+                Server server = new Server(Integer.parseInt(tfPort.getText()), tfUser.getText(), 10);
+                server.start();
+                Stage stage = (Stage) hostBtn.getScene().getWindow();
+                stage.close();
+            } catch (IOException ex){
+                snack.fireEvent(new JFXSnackbar.SnackbarEvent(ex.getMessage()));
+            }
+
         }
 
     }

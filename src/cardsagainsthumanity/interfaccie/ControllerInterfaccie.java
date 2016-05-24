@@ -1,4 +1,4 @@
-package sample.interfaccie;
+package cardsagainsthumanity.interfaccie;
 
 public interface ControllerInterfaccie {
 

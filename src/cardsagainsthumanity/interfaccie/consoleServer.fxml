@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="447.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.interfaccie.ControllerConsole">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="447.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cardsagainsthumanity.interfaccie.ControllerConsole">
    <children>
       <TextArea fx:id="textArea" layoutX="14.0" layoutY="14.0" prefHeight="419.0" prefWidth="419.0" />
       <TextField fx:id="textField" layoutX="14.0" layoutY="447.0" maxWidth="376.0" prefHeight="40.0" prefWidth="317.0" />

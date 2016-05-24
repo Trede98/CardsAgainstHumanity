@@ -1,0 +1,47 @@
+package cardsagainsthumanity.cards;
+
+import java.sql.*;
+
+/**
+ * Created by Giovanni on 07/05/16.
+ */
+public class DatabaseConnector {
+
+    private Connection connection;
+	private ResultSet tableList;
+    private Statement statement;
+
+    public DatabaseConnector(String path, String username, String password) {
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e) {
+        }
+
+        try {
+            connection = DriverManager.getConnection("jdbc:sqlite:" + path, username, password);
+            statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+            tableList = connection.getMetaData().getTables(null, null, "%", null);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+	public ResultSet getTableList() {
+		return tableList;
+	}
+	
+	public ResultSet executeQuery(String sql) throws SQLException {
+            return statement.executeQuery(sql);
+    }
+
+    public void resetTableList(){
+        try {
+            tableList = connection.getMetaData().getTables(null, null, "%", null);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+	
+}

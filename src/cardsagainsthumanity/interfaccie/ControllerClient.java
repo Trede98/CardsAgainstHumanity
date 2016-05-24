@@ -1,7 +1,8 @@
-package sample.interfaccie;
+package cardsagainsthumanity.interfaccie;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXSpinner;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,23 +10,20 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import sample.networking.ProtocolClient;
+import cardsagainsthumanity.networking.ProtocolClient;
 
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 
-public class ControllerHost implements ControllerInterfaccie, Initializable {
+public class ControllerClient implements ControllerInterfaccie, Initializable {
 
     @FXML
     JFXListView<Pane> yourCards;
 
     @FXML
     JFXListView<Pane> selectedCards;
-
-    @FXML
-    JFXButton btnStart;
 
     @FXML
     JFXListView<Label> punti;
@@ -40,31 +38,30 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
     Label labelPane;
 
     @FXML
-    Label labelCzar;
+    Label label;
+
+    @FXML
+    JFXSpinner spinner;
 
     @FXML
     JFXButton btnConfirm;
 
+    @FXML
+    Label labelCzar;
+
     private ProtocolClient protocolClient;
+
     private HashMap<String, Label> labelHashMap;
     private HashMap<String, Integer> pointsHashMap;
-
     private String cards = "";
     private int numCards;
-    private boolean cardCzar;
+    private boolean cardCzar = false;
     private boolean gameStarted = false;
 
-    void setProtocolClient(ProtocolClient protocolClient) {
-        this.protocolClient = protocolClient;
-    }
-
-    @FXML
-    public void startGame(){
-        protocolClient.send("STARTGAME");
-    }
 
     @FXML
     public void confirmCard(){
+
         if(cardCzar){
             Platform.runLater(() -> {
                 WhiteMultipleHBox selected = (WhiteMultipleHBox) selectedCards.getSelectionModel().getSelectedItem();
@@ -80,30 +77,36 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
             });
         }else {
 
-            Platform.runLater(() -> {
-                if(numCards > 0){
-                    WhiteCardPane selected = (WhiteCardPane) yourCards.getSelectionModel().getSelectedItem();
-                    cards = cards + selected.getPhrase() + "@@";
-                    yourCards.getItems().remove(selected);
-                    numCards--;
-                    if(numCards == 0){
-                        protocolClient.send("CARDSELECTED#"+ cards + "#" + protocolClient.getUser());
-                        cards = "";
-                    }
-
+        Platform.runLater(() -> {
+            if(numCards > 0){
+                WhiteCardPane selected = (WhiteCardPane) yourCards.getSelectionModel().getSelectedItem();
+                cards = cards + selected.getPhrase() + "@@";
+                yourCards.getItems().remove(selected);
+                numCards--;
+                if(numCards == 0){
+                    protocolClient.send("CARDSELECTED#"+ cards + "#" + protocolClient.getUser());
+                    cards = "";
                 }
-            });
+            }
+        });
         }
+    }
+
+
+    void setProtocolClient(ProtocolClient protocolClient) {
+        this.protocolClient = protocolClient;
     }
 
     @Override
     public void firstRound(){
+        gameStarted = true;
         Platform.runLater(() -> {
-            btnStart.setVisible(false);
-            btnStart.setDisable(true);
+            spinner.setVisible(false);
+            spinner.setDisable(true);
+            label.setVisible(false);
+            label.setDisable(true);
             blackCard.setVisible(true);
             labelPane.setText("Waiting for a new round");
-            gameStarted = true;
         });
     }
 
@@ -140,8 +143,6 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
                 }
             }
         });
-
-
     }
 
     @Override
@@ -167,13 +168,14 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
         }
     }
 
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         labelHashMap = new HashMap<>();
         pointsHashMap = new HashMap<>();
     }
 
-    @Override
     public void setCardCzar(boolean cardCzar) {
         this.cardCzar = cardCzar;
     }
@@ -226,8 +228,10 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
         Platform.runLater(() -> {
             yourCards.getItems().clear();
             selectedCards.getItems().clear();
-            btnStart.setVisible(true);
-            btnStart.setDisable(false);
+            spinner.setVisible(true);
+            spinner.setDisable(false);
+            label.setVisible(true);
+            label.setDisable(false);
             blackCard.setVisible(false);
             btnConfirm.setVisible(false);
             btnConfirm.setDisable(true);

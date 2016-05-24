@@ -1,4 +1,4 @@
-package sample.interfaccie;
+package cardsagainsthumanity.interfaccie;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -6,10 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import sample.networking.Client;
-import sample.networking.Server;
+import cardsagainsthumanity.networking.Client;
 
-import java.io.IOException;
 import java.net.Socket;
 
 /**

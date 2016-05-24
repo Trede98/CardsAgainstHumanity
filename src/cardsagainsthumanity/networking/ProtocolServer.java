@@ -1,7 +1,7 @@
-package sample.networking;
+package cardsagainsthumanity.networking;
 
-import sample.game.Game;
-import sample.interfaccie.InterfacciaConsole;
+import cardsagainsthumanity.game.Game;
+import cardsagainsthumanity.interfaccie.InterfacciaConsole;
 
 import java.io.IOException;
 import java.util.ArrayList;

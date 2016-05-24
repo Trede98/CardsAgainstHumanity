@@ -1,8 +1,8 @@
-package sample.networking;
+package cardsagainsthumanity.networking;
 
-import sample.game.Game;
-import sample.interfaccie.InterfacciaConsole;
-import sample.interfaccie.InterfacciaHost;
+import cardsagainsthumanity.game.Game;
+import cardsagainsthumanity.interfaccie.InterfacciaConsole;
+import cardsagainsthumanity.interfaccie.InterfacciaHost;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -25,9 +25,8 @@ public class Server  extends Thread{
     private ProtocolServer protocolServer;
     private ArrayList<LinkedSocked> threadGroup;
 
-    public Server(int port, String user, int maxNum) {
+    public Server(int port, String user, int maxNum) throws IOException {
         try {
-            InterfacciaConsole interfacciaConsole = new InterfacciaConsole(this);
             serverSocket = new ServerSocket(port);
             this.maxNum = maxNum;
             cont = 0;
@@ -36,11 +35,12 @@ public class Server  extends Thread{
             protocolServer = new ProtocolServer(threadGroup);
             game = new Game(protocolServer, min);
             protocolServer.setGame(game);
+            InterfacciaConsole interfacciaConsole = new InterfacciaConsole(this);
             InterfacciaHost interfacciaHost = new InterfacciaHost(port, user);
             interfacciaConsole.setServer(this);
             protocolServer.setConsole(interfacciaConsole);
         } catch (IOException e) {
-
+            throw new IOException("Errore nella creazione del server");
         }
 
     }

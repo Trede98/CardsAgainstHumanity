@@ -1,4 +1,4 @@
-package sample.cards;
+package cardsagainsthumanity.cards;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;

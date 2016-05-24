@@ -1,4 +1,4 @@
-package sample.networking;
+package cardsagainsthumanity.networking;
 
 import java.io.*;
 import java.net.Socket;

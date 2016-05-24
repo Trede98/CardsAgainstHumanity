@@ -1,10 +1,10 @@
-package sample.interfaccie;
+package cardsagainsthumanity.interfaccie;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import sample.networking.Server;
+import cardsagainsthumanity.networking.Server;
 
 import java.io.IOException;
 
