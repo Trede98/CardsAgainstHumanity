@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.*?>
+
+<BorderPane fx:id="pane" minHeight="600.0" minWidth="800.0" style="-fx-background-color: #404040;" stylesheets="@css/jfoenix-components.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cardsagainsthumanity.Controller">
+   <top>
+      <Label alignment="CENTER" prefHeight="143.0" prefWidth="1200.0" text="CARDS AGAINST HUMANITY" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="72.0" />
+         </font>
+      </Label>
+   </top>
+   <center>
+      <VBox alignment="CENTER" spacing="25.0" BorderPane.alignment="TOP_CENTER">
+         <children>
+            <JFXTextField fx:id="tfUser" minWidth="187.0" prefHeight="39.0" prefWidth="200.0" promptText="USERNAME" style="-fx-background-color: none; -fx-text-fill: WHITE;" />
+            <JFXTextField fx:id="tfIP" minWidth="187.0" prefHeight="39.0" prefWidth="200.0" promptText="ADDRESS" style="-fx-background-color: none; -fx-text-fill: WHITE;" />
+            <JFXTextField fx:id="tfPort" minWidth="187.0" prefHeight="39.0" prefWidth="200.0" promptText="PORT" style="-fx-background-color: none; -fx-text-fill: WHITE;" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <JFXButton fx:id="connectBtn" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#startClient" prefHeight="62.0" prefWidth="206.0" styleClass="button-raised" stylesheets="@css/jfoenix-components.css" text="CONNECT" />
+                  <JFXButton fx:id="hostBtn" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#startServer" prefHeight="62.0" prefWidth="206.0" styleClass="button-raised" stylesheets="@css/jfoenix-components.css" text="HOST" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <JFXSnackbar fx:id="snack" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>

@@ -146,6 +146,10 @@ public class Game {
         cardCzarIndex++;
         return cardCzar;
     }
+
+    public boolean isStarted() {
+        return started;
+    }
 }
 
 

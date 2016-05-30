@@ -27,21 +27,17 @@ public class DatabaseConnector {
             System.err.println(e.getMessage());
         }
     }
-
-	public ResultSet getTableList() {
-		return tableList;
-	}
 	
 	public ResultSet executeQuery(String sql) throws SQLException {
             return statement.executeQuery(sql);
     }
 
-    public void resetTableList(){
-        try {
-            tableList = connection.getMetaData().getTables(null, null, "%", null);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void noReturnQuery(String sql) throws SQLException {
+        statement.execute(sql);
+    }
+
+    public void close() throws SQLException {
+        connection.close();
     }
 	
 }

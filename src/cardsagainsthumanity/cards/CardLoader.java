@@ -5,13 +5,9 @@
  */
 package cardsagainsthumanity.cards;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**
@@ -20,12 +16,12 @@ import java.util.logging.Logger;
  */
 public class CardLoader {
     
-    private final String path;
+    private DatabaseConnector databaseConnector;
     private final TypeCard type;
     private ArrayList<Card> buffer;
 
-    public CardLoader(String path, TypeCard type) {
-        this.path = path;
+    public CardLoader(DatabaseConnector databaseConnector, TypeCard type) {
+        this.databaseConnector = databaseConnector;
         this.type = type;
         buffer = new ArrayList<>();
         loader();
@@ -33,17 +29,14 @@ public class CardLoader {
     
     private void loader(){
         try {
-            FileReader fr= new FileReader(path);
-            BufferedReader br = new BufferedReader(fr);
-            String line = br.readLine();
-            while(line != null){
-                buffer.add(new Card(line.substring(2), type));
-                line = br.readLine();
+            ResultSet rs = databaseConnector.executeQuery("SELECT Cards FROM Cards WHERE Type='" + type + "'");
+            while(rs.next()){
+                String v = rs.getString("Cards");
+                buffer.add(new Card(v, type));
             }
-        } catch (FileNotFoundException ex) {
-            
-        } catch (IOException ex) {
-            Logger.getLogger(CardLoader.class.getName()).log(Level.SEVERE, null, ex);
+            databaseConnector.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

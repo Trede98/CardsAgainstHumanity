@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CardsAgainstHumanity:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CardsAgainstHumanity_jar</output-path>
+    <root id="archive" name="CardsAgainstHumanity.jar">
+      <element id="module-output" name="CardsAgainstHumanity" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libraries/sqlite-jdbc-3.8.11.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libraries/jfoenix.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

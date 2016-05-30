@@ -40,7 +40,7 @@ public class Server  extends Thread{
             interfacciaConsole.setServer(this);
             protocolServer.setConsole(interfacciaConsole);
         } catch (IOException e) {
-            throw new IOException("Errore nella creazione del server");
+            throw new IOException("Error while creating the server");
         }
 
     }
@@ -75,11 +75,6 @@ public class Server  extends Thread{
             }
         }
 
-    }
-
-
-    public ProtocolServer getProtocolServer() {
-        return protocolServer;
     }
 
     public ServerSocket getServerSocket() {

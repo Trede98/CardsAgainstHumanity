@@ -8,21 +8,19 @@ public class Mazzo {
 
     private final TypeCard typeCard;
     private ArrayList<Card> mazzo;
+    private DatabaseConnector databaseConnector;
 
     public Mazzo(TypeCard typeCard) {
         this.typeCard = typeCard;
         try {
             String path = Mazzo.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+            databaseConnector = new DatabaseConnector(path + "\\CAH\\cards.db", "", "");
             switch (typeCard){
-                case WHITE: mazzo = new CardLoader(path + "\\CAH\\WhiteCards.txt", TypeCard.WHITE).getBuffer(); break;
-                case BLACK: mazzo = new CardLoader(path + "\\CAH\\BlackCards.txt", TypeCard.BLACK).getBuffer(); break;
+                case WHITE: mazzo = new CardLoader(databaseConnector, TypeCard.WHITE).getBuffer(); break;
+                case BLACK: mazzo = new CardLoader(databaseConnector, TypeCard.BLACK).getBuffer(); break;
             }
         } catch (URISyntaxException e) {
 
-        }
-        switch (typeCard){
-            case WHITE: mazzo = new CardLoader("CAH\\WhiteCards.txt", TypeCard.WHITE).getBuffer(); break;
-            case BLACK: mazzo = new CardLoader("CAH\\BlackCards.txt", TypeCard.BLACK).getBuffer(); break;
         }
     }
 

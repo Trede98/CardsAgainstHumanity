@@ -49,7 +49,7 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
     private HashMap<String, Label> labelHashMap;
     private HashMap<String, Integer> pointsHashMap;
 
-    private String cards = "";
+    private String cards;
     private int numCards;
     private boolean cardCzar;
     private boolean gameStarted = false;
@@ -75,6 +75,7 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
                     cards1 = cards1 + l.getText() + "@@";
                 }
                 protocolClient.send("CARDWINNING#"+ cards1);
+                btnConfirm.setDisable(true);
                 cardCzar = false;
                 numCards = 0;
             });
@@ -82,15 +83,19 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
 
             Platform.runLater(() -> {
                 if(numCards > 0){
-                    WhiteCardPane selected = (WhiteCardPane) yourCards.getSelectionModel().getSelectedItem();
-                    cards = cards + selected.getPhrase() + "@@";
-                    yourCards.getItems().remove(selected);
-                    numCards--;
-                    if(numCards == 0){
-                        protocolClient.send("CARDSELECTED#"+ cards + "#" + protocolClient.getUser());
-                        cards = "";
+                    try{
+                        WhiteCardPane selected = (WhiteCardPane) yourCards.getSelectionModel().getSelectedItem();
+                        cards = cards + selected.getPhrase() + "@@";
+                        yourCards.getItems().remove(selected);
+                        numCards--;
+                        if(numCards == 0){
+                            protocolClient.send("CARDSELECTED#"+ cards + "#" + protocolClient.getUser());
+                            btnConfirm.setDisable(true);
+                            cards = "";
+                        }
+                    } catch (NullPointerException ex){
+                        System.out.println("You must select a card");
                     }
-
                 }
             });
         }
@@ -111,7 +116,9 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
     public void addPlayer(String user) {
         Platform.runLater(() -> {
             pointsHashMap.put(user, 0);
-            labelHashMap.put(user, new Label(user + ": 0 awesome points"));
+            Label us = new Label(user + ": 0 awesome points");
+            us.setWrapText(true);
+            labelHashMap.put(user, us);
             punti.getItems().add(labelHashMap.get(user));
         });
     }
@@ -233,6 +240,8 @@ public class ControllerHost implements ControllerInterfaccie, Initializable {
             btnConfirm.setDisable(true);
             labelPane.setText("Waiting for a new round");
             labelCzar.setVisible(false);
+            cardCzar = false;
+            cards = "";
         });
     }
 

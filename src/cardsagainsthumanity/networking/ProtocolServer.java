@@ -30,8 +30,10 @@ public class ProtocolServer {
         switch (elements[0]) {
             case "STARTGAME":
                 game.start();
-                this.clock = new Clock();
-                clock.start();
+                if(game.isStarted()){
+                    this.clock = new Clock();
+                    clock.start();
+                }
                 break;
             case "CARDWINNING":
                 send("POINTPLUS#" + carte.get(elements[1].substring(0, elements[1].length() - 2)) + "#" + elements[1].substring(0, elements[1].length() - 2), PointerToSend.ALL, null);
@@ -84,7 +86,7 @@ public class ProtocolServer {
         Iterator it = threadsGroup.iterator();
         Server.LinkedSocked t = null;
         boolean trovato = false;
-        while (it.hasNext() && trovato == false) {
+        while (it.hasNext() && !trovato) {
             t = (Server.LinkedSocked) it.next();
             if (t.getUser().equals(user)) {
                 trovato = true;
@@ -92,7 +94,7 @@ public class ProtocolServer {
         }
 
         it = threadsGroup.iterator();
-        while (it.hasNext() && trovato == true) {
+        while (it.hasNext() && trovato) {
             Server.LinkedSocked s = (Server.LinkedSocked) it.next();
             try {
                 if (!s.getUser().equals(t.getUser())) t.getWriter().writeUTF("ADDPLAYER#" + s.getUser());
@@ -172,14 +174,14 @@ public class ProtocolServer {
                     }
                 }
                 choosing = false;
-                String all = "";
+                String allCards = "";
                 Iterator it = carte.keySet().iterator();
                 if(carte.size() > 0) {
                     while (it.hasNext()) {
-                        all = all + it.next() + "!!";
+                        allCards = allCards + it.next() + "!!";
                     }
 
-                    send("SELECTING#" + all.substring(0, all.length() - 2), PointerToSend.ALL, null);
+                    send("SELECTING#" + allCards.substring(0, allCards.length() - 2), PointerToSend.ALL, null);
 
                 for (int i = 0; i < 60 && !selected && !interrupted && !salta; i++) {
                     try {

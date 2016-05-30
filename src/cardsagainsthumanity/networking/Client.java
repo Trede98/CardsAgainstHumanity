@@ -6,13 +6,18 @@ import java.net.SocketException;
 import java.util.concurrent.TimeUnit;
 public class Client {
 
-    private Socket socket;
-    private DataInputStream reader;
-    private DataOutputStream writer;
-    private Thread listener;
-    private String user;
-    private ProtocolClient protocolClient;
+    private Socket socket; //Socket client
+    private DataInputStream reader; //Canale di input del client
+    private DataOutputStream writer; //Canale di output del client
+    private Thread listener; //Listener dei messaggi in arrivo
+    private String user; //Username
+    private ProtocolClient protocolClient; //Protocollo di gestione del client
 
+    /**
+     * Costruttore del client
+     * @param socket
+     * @param user
+     */
     public Client(Socket socket, String user) {
         this.socket = socket;
         this.user = user;

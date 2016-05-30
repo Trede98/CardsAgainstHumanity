@@ -1,8 +1,10 @@
 package cardsagainsthumanity.interfaccie;
 
+import cardsagainsthumanity.cards.Mazzo;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import cardsagainsthumanity.networking.Server;
 
@@ -29,6 +31,8 @@ public class InterfacciaConsole {
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("Console Server");
         primaryStage.setScene(new Scene(root));
+        String path = Mazzo.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath() + "CAH/icon.png";
+        primaryStage.getIcons().add(new Image("file:"+path));
         primaryStage.show();
         controllerConsole = fxmlLoader.getController();
         controllerConsole.setServer(server);

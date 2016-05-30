@@ -72,6 +72,7 @@ public class ControllerClient implements ControllerInterfaccie, Initializable {
                     cards1 = cards1 + l.getText() + "@@";
                 }
                 protocolClient.send("CARDWINNING#"+ cards1);
+                btnConfirm.setDisable(true);
                 cardCzar = false;
                 numCards = 0;
             });
@@ -85,6 +86,7 @@ public class ControllerClient implements ControllerInterfaccie, Initializable {
                 numCards--;
                 if(numCards == 0){
                     protocolClient.send("CARDSELECTED#"+ cards + "#" + protocolClient.getUser());
+                    btnConfirm.setDisable(true);
                     cards = "";
                 }
             }
@@ -114,7 +116,9 @@ public class ControllerClient implements ControllerInterfaccie, Initializable {
     public void addPlayer(String user) {
         Platform.runLater(() -> {
             pointsHashMap.put(user, 0);
-            labelHashMap.put(user, new Label(user + ": 0 awesome points"));
+            Label us = new Label(user + ": 0 awesome points");
+            us.setWrapText(true);
+            labelHashMap.put(user, us);
             punti.getItems().add(labelHashMap.get(user));
         });
     }
@@ -237,6 +241,8 @@ public class ControllerClient implements ControllerInterfaccie, Initializable {
             btnConfirm.setDisable(true);
             labelPane.setText("Waiting for a new round");
             labelCzar.setVisible(false);
+            cardCzar = false;
+            cards = "";
         });
     }
 

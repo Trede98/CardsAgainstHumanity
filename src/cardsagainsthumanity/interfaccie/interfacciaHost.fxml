@@ -8,51 +8,42 @@
 <?import javafx.scene.layout.*?>
 <?import com.jfoenix.controls.*?>
 
-<GridPane alignment="center" hgap="10" prefHeight="855.0" prefWidth="1276.0" stylesheets="@../css/jfoenix-components.css" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cardsagainsthumanity.interfaccie.ControllerHost">
-    <columnConstraints>
-        <ColumnConstraints maxWidth="1289.0" minWidth="1269.0" prefWidth="1278.0" />
-        <ColumnConstraints maxWidth="20.0" minWidth="0.0" prefWidth="11.0" />
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints />
-    </rowConstraints>
-    <children>
-        <AnchorPane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="855.0" prefWidth="1289.0" style="-fx-background-color: #404040;" stylesheets="@../css/jfoenix-components.css">
-            <children>
-            <StackPane fx:id="blackCard" layoutX="519.0" layoutY="112.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="295.0" prefWidth="234.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-radius: 10 10 10 10; -fx-border-radius: 10 10 10 10; -fx-border-color: #FFFFFF; -fx-background-color: #000000;" visible="false">
-               <children>
-                  <Label fx:id="labelPane" alignment="TOP_LEFT" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="213.0" textFill="WHITE" wrapText="true">
-                     <font>
-                        <Font name="HelveticaNeueLTPro-Roman" size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-            </StackPane>
-                <JFXSnackbar fx:id="snack" layoutX="201.0" layoutY="670.0" prefHeight="20.0" prefWidth="164.0" stylesheets="@../css/jfoenix-components.css" />
-            <JFXListView fx:id="selectedCards" cellVerticalMargin="0.0" layoutX="274.0" layoutY="560.0" orientation="HORIZONTAL" prefHeight="295.0" prefWidth="1016.0" style="-fx-background-color: #404040;" styleClass="selezionate" />
-            <JFXListView fx:id="punti" layoutY="55.0" prefHeight="800.0" prefWidth="274.0" style="-fx-background-color: #cccccc;" />
-            <JFXListView fx:id="yourCards" layoutX="1032.0" prefHeight="855.0" prefWidth="255.0" style="-fx-background-color: #404040;" stylesheets="@../css/scrollStyle.css" visible="false">
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-               <styleClass>
-                  <String fx:value="mylistview" />
-                  <String fx:value="selezionate" />
-               </styleClass></JFXListView>
-            <JFXButton fx:id="btnStart" layoutX="1046.0" layoutY="48.0" onAction="#startGame" prefHeight="73.0" prefWidth="170.0" styleClass="button-raised" stylesheets="@../css/jfoenix-components.css" text="START" />
-            <Label alignment="CENTER" prefHeight="55.0" prefWidth="274.0" text="POINTS" textFill="WHITE">
+
+  <AnchorPane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="855.0" prefWidth="1289.0" style="-fx-background-color: #404040;" stylesheets="@../css/jfoenix-components.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cardsagainsthumanity.interfaccie.ControllerHost">
+      <children>
+      <StackPane fx:id="blackCard" layoutX="519.0" layoutY="112.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="295.0" prefWidth="234.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-radius: 10 10 10 10; -fx-border-radius: 10 10 10 10; -fx-border-color: #FFFFFF; -fx-background-color: #000000;" visible="false">
+         <children>
+            <Label fx:id="labelPane" alignment="TOP_LEFT" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="213.0" textFill="WHITE" wrapText="true">
                <font>
-                  <Font name="System Bold" size="24.0" />
+                  <Font name="HelveticaNeueLTPro-Roman" size="18.0" />
                </font>
             </Label>
-            <JFXButton />
-            <JFXButton fx:id="btnConfirm" disable="true" layoutX="800.0" layoutY="112.0" onAction="#confirmCard" prefHeight="40.0" prefWidth="127.0" styleClass="button-raised" text="CONFIRM SELECTION" visible="false" />
-            <Label fx:id="labelCzar" alignment="CENTER" layoutX="319.0" layoutY="20.0" prefHeight="80.0" prefWidth="652.0" text="YOU ARE THE CARD CZAR" textFill="WHITE" visible="false">
-               <font>
-                  <Font name="System Bold" size="36.0" />
-               </font>
-            </Label>
-            </children>
-        </AnchorPane>
-    </children>
-</GridPane>
+         </children>
+      </StackPane>
+          <JFXSnackbar fx:id="snack" layoutX="201.0" layoutY="670.0" prefHeight="20.0" prefWidth="164.0" stylesheets="@../css/jfoenix-components.css" />
+      <JFXListView fx:id="selectedCards" cellVerticalMargin="0.0" layoutX="274.0" layoutY="560.0" orientation="HORIZONTAL" prefHeight="295.0" prefWidth="1016.0" style="-fx-background-color: #404040;" styleClass="selezionate" />
+      <JFXListView fx:id="punti" layoutY="55.0" maxHeight="1.7976931348623157E308" prefHeight="800.0" prefWidth="274.0" style="-fx-background-color: #cccccc;" />
+      <JFXListView fx:id="yourCards" layoutX="1032.0" prefHeight="855.0" prefWidth="255.0" style="-fx-background-color: #404040;" stylesheets="@../css/scrollStyle.css" visible="false">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <styleClass>
+            <String fx:value="mylistview" />
+            <String fx:value="selezionate" />
+         </styleClass>
+      </JFXListView>
+      <JFXButton fx:id="btnStart" layoutX="1046.0" layoutY="48.0" onAction="#startGame" prefHeight="73.0" prefWidth="170.0" styleClass="button-raised" stylesheets="@../css/jfoenix-components.css" text="START" />
+      <Label alignment="CENTER" prefHeight="55.0" prefWidth="274.0" text="POINTS" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <JFXButton />
+      <JFXButton fx:id="btnConfirm" disable="true" layoutX="800.0" layoutY="112.0" onAction="#confirmCard" prefHeight="40.0" prefWidth="127.0" styleClass="button-raised" text="CONFIRM SELECTION" visible="false" />
+      <Label fx:id="labelCzar" alignment="CENTER" layoutX="319.0" layoutY="20.0" prefHeight="80.0" prefWidth="652.0" text="YOU ARE THE CARD CZAR" textFill="WHITE" visible="false">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      </children>
+  </AnchorPane>
